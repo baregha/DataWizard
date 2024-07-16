@@ -1,0 +1,39 @@
+DataWizard
+import os
+
+def create_file(filepath, content=""):
+    with open(filepath, 'w') as file:
+        file.write(content)
+
+def create_project_structure():
+    # Define project structure
+    project_name = "my-project"
+    dirs = [
+        project_name,
+        os.path.join(project_name, "src"),
+        os.path.join(project_name, "tests"),
+        os.path.join(project_name, "data")
+    ]
+    files = {
+        os.path.join(project_name, "README.md"): "# My Project\n\nA brief description of what this project does and who it's for.",
+        os.path.join(project_name, "requirements.txt"): "# List your project dependencies here, e.g.,\nnumpy\npandas",
+        os.path.join(project_name, ".gitignore"): "# Ignore common files and folders such as:\n__pycache__/\n*.pyc\n.env",
+        os.path.join(project_name, "src", "__init__.py"): "",
+        os.path.join(project_name, "src", "main.py"): "def main():\n    print(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    main()",
+        os.path.join(project_name, "tests", "__init__.py"): "",
+        os.path.join(project_name, "tests", "test_main.py"): "import unittest\nfrom src.main import main\n\nclass TestMain(unittest.TestCase):\n    def test_main(self):\n        self.assertIsNone(main())\n\nif __name__ == \"__main__\":\n    unittest.main()",
+        os.path.join(project_name, "data", "sample_data.csv"): ""
+    }
+
+    # Create directories
+    for dir in dirs:
+        os.makedirs(dir, exist_ok=True)
+
+    # Create files
+    for filepath, content in files.items():
+        create_file(filepath, content)
+
+    print(f"Project structure created under '{project_name}' directory.")
+
+if __name__ == "__main__":
+    create_project_structure()
